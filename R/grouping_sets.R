@@ -35,8 +35,10 @@ gs_bool_to_group_number <- function(x) {
 #' @export
 #'
 #' @examples
-#' grouping_number(c("origin_state", "origin_zip", "destination_state"),
-#' "origin_state")
+#' grouping_number(
+#'   c("origin_state", "origin_zip", "destination_state"),
+#'   "origin_state"
+#' )
 grouping_number <- function(all_cols, included_cols) {
   stopifnot("included_cols not in all_cols" = all(included_cols %in% all_cols))
   gs_bool_to_group_number(all_cols %in% included_cols)
