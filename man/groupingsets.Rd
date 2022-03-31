@@ -56,6 +56,8 @@ The grouping set number will correspond to the output of
 }
 \examples{
 gs_bool_to_group_number(c(TRUE, FALSE, FALSE))
-grouping_number(c("origin_state", "origin_zip", "destination_state"),
-"origin_state")
+grouping_number(
+  c("origin_state", "origin_zip", "destination_state"),
+  "origin_state"
+)
 }
