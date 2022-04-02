@@ -8,6 +8,7 @@
 #' @return a ggplot theme
 #' @export
 #'
+#' @import ggplot2
 theme1 <- function(grid_type = c("both", "horizontal", "vertical", "none")) {
   grid_type <- match.arg(grid_type)
   grid_color <- "grey92"
@@ -30,3 +31,108 @@ theme1 <- function(grid_type = c("both", "horizontal", "vertical", "none")) {
 
   base_theme + grid_option + ggplot2::theme(plot.title = title_font)
 }
+
+
+
+
+# Annotation functions ----------------------------------------------------
+
+compute_group_position_annotation <- function(pos) {
+  function(data, scales, params, labeler, ...) {
+    if (pos < 0) {
+      pos <- nrow(data) + pos + 1
+    }
+    out <- data[pos, , drop = FALSE]
+    if (!("annotation_label" %in% names(out))) {
+      warning("aes annotation_label not specified. Defaulting to match `y` aesthetic.")
+      out$annotation_label <- out$y
+    }
+    out$label <- labeler(out$annotation_label)
+    out
+  }
+}
+
+compute_summary_annotation <- function(summary_type = c('max', 'min')) {
+  summary_type <- match.arg(summary_type)
+  fn <- get(paste0('which.', summary_type))
+  function(data, scales, params, labeler, ...) {
+    i <- fn(data$y)
+    out <- data[i, , drop = FALSE]
+    if (!("annotation_label" %in% names(out))) {
+      warning("aes annotation_label not specified. Defaulting to match `y` aesthetic.")
+      out$annotation_label <- out$y
+    }
+    out$label <- labeler(out$annotation_label)
+    out
+  }
+}
+
+
+StatAnnotate <- ggproto(
+  "StatAnnotate",
+  Stat,
+  required_aes = c("x", "y"),
+  default_aes = aes(annotation_label = stat(y))
+)
+
+StatFirst <- ggproto("StatFirst",
+                     StatAnnotate,
+                     compute_group = compute_group_position_annotation(1))
+StatLast <- ggproto("StatLast",
+                     StatAnnotate,
+                     compute_group = compute_group_position_annotation(-1))
+
+StatMin <- ggproto("StatMin",
+                   StatAnnotate,
+                   compute_group = compute_summary_annotation('min'))
+
+StatMax <- ggproto("StatMax",
+                   StatAnnotate,
+                   compute_group = compute_summary_annotation('max'))
+
+stat_annotate_ <- function(stat) {
+  function(mapping = NULL,
+           data = NULL,
+           geom = "text",
+           position = "identity",
+           na.rm = FALSE,
+           inherit.aes = TRUE,
+           vjust = "inward",
+           hjust = "inward",
+           size = 2.8,
+           check_overlap = TRUE,
+           labeler = scales::label_number(big.mark = ','),
+           ...) {
+    ggplot2::layer(
+      stat = stat,
+      data = data,
+      mapping = mapping,
+      geom = geom,
+      position = position,
+      show.legend = FALSE,
+      inherit.aes = inherit.aes,
+      params = list(
+        na.rm = na.rm,
+        vjust = vjust,
+        hjust = hjust,
+        size = size,
+        check_overlap = check_overlap,
+        labeler = labeler,
+        ...
+      )
+    )
+  }
+}
+
+#' @export
+stat_annotate_first <- stat_annotate_(StatFirst)
+
+#' @export
+stat_annotate_last <- stat_annotate_(StatLast)
+
+#' @export
+stat_annotate_min <- stat_annotate_(StatMin)
+
+#' @export
+stat_annotate_max <- stat_annotate_(StatMax)
+
