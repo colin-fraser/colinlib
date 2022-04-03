@@ -12,10 +12,13 @@ Imports:
     dplyr,
     ggplot2,
     ggthemes,
+    magrittr,
     rlang,
     tibble,
     tidyselect
 Suggests: 
-    testthat (>= 3.0.0)
+    palmerpenguins (>= 0.1.0),
+    testthat (>= 3.0.0),
+    vdiffr (>= 1.0.4)
 Config/testthat/edition: 3
 RoxygenNote: 7.1.2
