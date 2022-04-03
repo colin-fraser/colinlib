@@ -1,7 +1,7 @@
 Package: colinlib
 Type: Package
 Title: Just some R functions that I find useful
-Version: 0.1.0
+Version: 0.2.0
 Author: Colin Fraser
 Maintainer: Colin Fraser <colin.r.fraser@gmail.com>
 Description: Just does some things.
@@ -12,10 +12,13 @@ Imports:
     dplyr,
     ggplot2,
     ggthemes,
+    magrittr,
     rlang,
     tibble,
     tidyselect
 Suggests: 
-    testthat (>= 3.0.0)
+    palmerpenguins (>= 0.1.0),
+    testthat (>= 3.0.0),
+    vdiffr (>= 1.0.4)
 Config/testthat/edition: 3
 RoxygenNote: 7.1.2
