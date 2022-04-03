@@ -1,7 +1,7 @@
 Package: colinlib
 Type: Package
 Title: Just some R functions that I find useful
-Version: 0.1.0
+Version: 0.2.0
 Author: Colin Fraser
 Maintainer: Colin Fraser <colin.r.fraser@gmail.com>
 Description: Just does some things.
