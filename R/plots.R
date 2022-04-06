@@ -90,6 +90,28 @@ StatMax <- ggproto("StatMax",
                    StatAnnotate,
                    compute_group = compute_summary_annotation('max'))
 
+#' Guess which labeler to use for stat_annotate_
+#'
+#' @description Given a vector, guess how to label it. This is used in e.g.
+#' stat_annotate_min
+#'
+#' @param x a vector to be labeled
+#'
+#' @return
+#' @noMd
+guess_labeler <- function(x) {
+  if (is.character(x)) {
+    return(x)
+  }
+  if (is.factor(x)) {
+    return(as.character(x))
+  }
+  if (is.numeric(x)) {
+    return(scales::label_number(big.mark = ',')(x))
+  }
+  stop(glue::glue("Don't know how to label a vector of type {class(x)}."))
+}
+
 stat_annotate_ <- function(stat) {
   function(mapping = NULL,
            data = NULL,
@@ -97,11 +119,11 @@ stat_annotate_ <- function(stat) {
            position = "identity",
            na.rm = FALSE,
            inherit.aes = TRUE,
-           vjust = "inward",
-           hjust = "inward",
+           vjust = "outward",
+           hjust = "outward",
            size = 2.8,
            check_overlap = TRUE,
-           labeler = scales::label_number(big.mark = ','),
+           labeler = guess_labeler,
            ...) {
     ggplot2::layer(
       stat = stat,
