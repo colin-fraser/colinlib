@@ -16,7 +16,7 @@ slice_top_categories(.data, .n, ..., .wt = NULL)
 \item{.wt}{an optional weight category}
 }
 \value{
-
+A dataframe containing only the top categories
 }
 \description{
 This slices a dataframe to only include the most frequent
