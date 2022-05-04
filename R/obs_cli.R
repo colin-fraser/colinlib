@@ -49,6 +49,7 @@ sanitize_title <- function(x) {
   stringr::str_replace_all(x, "[:]", "-")
 }
 
+<<<<<<< HEAD
 to_link <- function(x) {
   paste0("[[", x, "]]")
 }
@@ -57,6 +58,8 @@ to_md_list <- function(x) {
   paste0("- ", x, collapse = "\n")
 }
 
+=======
+>>>>>>> ca44081eeea915ea09728ec77f39bdb3c77d82de
 new_paper <- function(x, extra_tags = NULL, directory = "notes") {
   template <- "
   ---
@@ -64,10 +67,16 @@ new_paper <- function(x, extra_tags = NULL, directory = "notes") {
   tags: [{tags}]
   ---
   # {title}
+<<<<<<< HEAD
   **Citation**: {x}
   **Status**: #to-read
   **Authors**:
   {authors}
+=======
+
+  **Citation**: {x}
+  **Status**: #to-read
+>>>>>>> ca44081eeea915ea09728ec77f39bdb3c77d82de
 
   ## Abstract
 
