@@ -115,3 +115,8 @@ new_paper <- function(x, extra_tags = NULL, directory = "notes", browse = TRUE) 
   if (browse) browseURL(uri)
   uri
 }
+
+ls_templates <- function(template_dir) {
+  fs::dir_ls(template_dir)
+}
+
