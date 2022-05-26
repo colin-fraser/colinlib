@@ -4,7 +4,7 @@
 \alias{new_paper}
 \title{Create a paper entry}
 \usage{
-new_paper(x, extra_tags = NULL, directory = "notes")
+new_paper(x, extra_tags = NULL, directory = "notes", browse = TRUE)
 }
 \arguments{
 \item{x}{the citation in Vancouver style}
