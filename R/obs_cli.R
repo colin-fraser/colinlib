@@ -107,7 +107,7 @@ new_paper_uri <- function(x, extra_tags = NULL, directory = "notes") {
 #' @param extra_tags extra tags
 #' @param directory directory to create the notes
 #'
-#' @return NULL
+#' @return The uri
 #' @export
 #'
 new_paper <- function(x, extra_tags = NULL, directory = "notes", browse = TRUE) {

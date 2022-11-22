@@ -6,5 +6,6 @@
 #' @importFrom ggplot2 ggplot
 #' @importFrom ggplot2 ggproto
 #' @importFrom ggplot2 Stat
+#' @importFrom utils browseURL
 ## usethis namespace: end
 NULL

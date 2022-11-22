@@ -13,6 +13,9 @@ new_paper(x, extra_tags = NULL, directory = "notes", browse = TRUE)
 
 \item{directory}{directory to create the notes}
 }
+\value{
+The uri
+}
 \description{
 Create a paper entry
 }
