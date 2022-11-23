@@ -7,6 +7,7 @@
 #' @param indent_character the character to use for indenting
 #'
 #' @return an indented character vector
+#' @export
 #'
 cg_indent <- function(x, indent_level = 0, indent_character = ' ') {
   indent <- paste(rep(indent_character, indent_level), collapse = '')
